@@ -1,0 +1,32 @@
+{{#each errors}}
+
+  <div class="alert alert-danger alert-dismissible fade show">
+    {{text}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  {{else}}
+
+{{/each}}
+
+<h2>Lista de categorias</h2>
+<hr>
+<a href="/admin/cat/add"><button class="btn btn-success">Nova categoria</button></a>
+
+{{#each categories}}
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>{{name}}</h4>
+            <small>Slug: {{slug}}</small> <br>
+            <small>Data de criação: {{#formatDate}} {{date}} {{/formatDate}}</small>
+            <br>
+            <a href="/admin/cat/edit/{{_id}}"><button class="btn btn-warning mt-3">Editar</button></a>
+        </div>
+    </div>
+
+{{else}}
+
+{{/each}}
