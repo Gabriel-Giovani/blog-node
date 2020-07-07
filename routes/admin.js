@@ -173,6 +173,22 @@ router.post('/cat/edit', (req, res) => {
 
 });
 
+router.post('/cat/delete', (req, res) => {
+
+    Category.remove({_id: req.body.id}).then(() => {
+
+        req.flash('success_msg', 'Categoria deletada com sucesso!');
+        res.redirect('/admin/cat');
+
+    }).catch((error) => {
+
+        req.flash('error_msg', 'Hove um erro ao deletar a categoria. Tente mais tarde!');
+        res.redirect('/admin/cat');
+
+    });
+
+});
+
 router.get('/cat/cancel', (req, res) => {
 
     res.redirect('/admin/cat');
