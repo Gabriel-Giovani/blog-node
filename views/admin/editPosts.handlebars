@@ -1,0 +1,52 @@
+{{#each errors}}
+
+  <div class="alert alert-danger alert-dismissible fade show">
+    {{text}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  {{else}}
+
+{{/each}}
+
+<h2>Editar postagem</h2>
+
+<form class="mb-5" action="/admin/posts/edit" method="POST">
+  <div class="form-group">
+    <input type="hidden" name="id" value="{{post._id}}">
+    <label for="title-post">Título da postagem: </label>
+    <input type="text" class="form-control" id="title-post" name="title" value="{{post.title}}">
+  </div>
+
+  <div class="form-group">
+    <label for="slug">Slug: </label>
+    <input type="text" class="form-control" id="slug" name="slug" value="{{post.slug}}">
+  </div>
+
+  <div class="form-group">
+    <label for="category">Categoria: </label>
+    <select class="form-control" id="category" name="category">
+        <option selected="true" value="0">Escolha uma categoria</option>
+        {{#each categories}}
+            <option value="{{_id}}">{{name}}</option>
+        {{else}}
+            <option value="0">Nenhuma categoria registrada</option>
+        {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="desc">Descrição: </label>
+    <textarea class="form-control" id="desc" name="desc" rows="2">{{post.description}}</textarea>
+  </div>
+
+  <div class="form-group text-center">
+    <label for="content"><strong>Conteúdo: </strong></label>
+    <textarea class="form-control" id="content" name="content" rows="10">{{post.content}}</textarea>
+  </div>
+
+  <a href="/admin/posts/cancel"><button type="button" class="btn btn-danger">Cancelar</button></a>
+  <button type="submit" class="btn btn-success">Salvar</button>
+</form>

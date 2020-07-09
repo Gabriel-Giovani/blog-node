@@ -3,16 +3,12 @@ const router = express.Router();
 const mongoose = require('mongoose');
 require('../models/Category');
 const Category = mongoose.model('Category');
+require('../models/Posts');
+const Post = mongoose.model('Post');
 
 router.get('/', (req, res) => {
 
     res.render('../views/admin/index');
-
-});
-
-router.get('/posts', (req, res) => {
-
-    res.send('Página de posts');
 
 });
 
@@ -27,7 +23,7 @@ router.get('/cat', (req, res) => {
         req.flash('error_msg', 'Houve um erro ao listar as categorias');
         res.redirect('/admin');
 
-    })
+    });
 
 });
 
@@ -192,6 +188,226 @@ router.post('/cat/delete', (req, res) => {
 router.get('/cat/cancel', (req, res) => {
 
     res.redirect('/admin/cat');
+
+});
+
+router.get('/posts', (req, res) => {
+
+    Post.find().populate('category').sort([['date', 'desc']]).lean().then((posts) => {
+
+        res.render('../views/admin/posts', {posts: posts});
+
+    }).catch((error) => {
+
+        req.flash('error_msg', 'Houve um erro ao listar as postagens!');
+        res.redirect('/admin');
+
+    });
+
+});
+
+router.get('/posts/add', (req, res) => {
+
+    Category.find().lean().then((categories) => {
+
+        res.render('../views/admin/addPosts', {categories: categories});
+
+    }).catch((error) => {
+
+        req.flash('error_msg', 'Houve um erro ao carregar a lista de categorias. Tente mais tarde!');
+        res.redirect('/admin/posts/add');
+
+    });
+
+});
+
+router.post('/posts/new', (req, res) => {
+
+    let title = req.body.title;
+    let slug = req.body.slug;
+    let category = req.body.category;
+    let desc = req.body.desc;
+    let content = req.body.content;
+    let errors = [];
+
+    if(!title || typeof title == undefined || title == null){
+
+        errors.push({ text: 'Campo "título" obrigatório!' });
+
+    }
+
+    else if(!slug || typeof slug == undefined || slug == null){
+
+        errors.push({ text: 'Campo "slug" obrigatório!' });
+
+    }
+
+    if(category == '0'){
+
+        errors.push({text: 'Categoria inválida. Registre uma categoria antes de salvar uma postagem.'});
+
+    }
+
+    if(errors.length > 0){
+
+        Category.find().lean().then((categories) => {
+
+            res.render('../views/admin/addPosts', {
+                errors: errors,
+                categories: categories
+            });
+
+        });
+
+    } else{
+
+        const newPost = {
+
+            title: title,
+            slug: slug,
+            category: category,
+            description: desc,
+            content: content
+
+        }
+
+        new Post(newPost).save().then(() => {
+
+            req.flash('success_msg', 'Postagem criada com sucesso!');
+            res.redirect('/admin/posts');
+
+        }).catch((error) => {
+
+            req.flash('error_msg', 'Houve um erro ao salvar a postagem. Tente novamente mais tarde!');
+            res.redirect('/admin/posts');
+
+        });
+
+    }
+
+});
+
+router.get('/posts/edit/:id', (req, res) => {
+
+    Post.findOne({_id: req.params.id}).lean().then((post) => {
+
+        Category.find().lean().then((categories) => {
+
+            res.render('../views/admin/editPosts', {
+                post: post,
+                categories: categories
+            });
+
+        });
+
+    }).catch((error) => {
+
+        req.flash('error_msg', 'Essa postagem não existe!');
+        res.redirect('/admin/posts');
+
+    });
+
+});
+
+router.post('/posts/edit', (req, res) => {
+
+    Post.findOne({_id: req.body.id}).then((post) => {
+
+        let id = req.body.id;
+        let title = req.body.title;
+        let slug = req.body.slug;
+        let category = req.body.category;
+        let desc = req.body.desc;
+        let content = req.body.content;
+        let errors = [];
+
+        if(!title || typeof title == undefined || title == null){
+
+            errors.push({ text: 'Campo "título" obrigatório!' });
+
+        }
+
+        else if(!slug || typeof slug == undefined || slug == null){
+
+            errors.push({ text: 'Campo "slug" obrigatório!' });
+
+        }
+
+        if(category == '0'){
+
+            errors.push({text: 'Categoria inválida. Registre uma categoria antes de salvar uma postagem.'});
+
+        }
+
+        if(errors.length > 0){
+
+            Category.find().lean().then((categories) => {
+
+                res.render('../views/admin/editPosts', {
+                    errors: errors,
+                    categories: categories,
+                    post:{
+                        _id: id,
+                        title: title,
+                        slug: slug,
+                        category: category,
+                        description: desc,
+                        content: content
+                    }
+                });
+
+            });
+
+        } else{
+
+            post.title = title;
+            post.slug = slug;
+            post.category = category;
+            post.description = desc;
+            post.content = content;
+
+            post.save().then(() => {
+
+                req.flash('success_msg', 'Postagem editada com sucesso!');
+                res.redirect('/admin/posts');
+
+            }).catch((error) => {
+
+                req.flash('error_msg', 'Houve um erro ao editar a postagem. Tente mais tarde!');
+                res.redirect('/admin/posts');
+
+            });
+
+        }
+
+    }).catch((error) => {
+
+        req.flash('error_msg', 'Houve um erro ao editar a postagem. Tente mais tarde!: ' + error);
+        res.redirect('/admin/posts');
+
+    });
+
+});
+
+router.post('/posts/delete', (req, res) => {
+
+    Post.remove({_id: req.body.id}).then(() => {
+
+        req.flash('success_msg', 'Postagem deletada com sucesso!');
+        res.redirect('/admin/posts');
+
+    }).catch((error) => {
+
+        req.flash('error_msg', 'Hove um erro ao deletar a postagem. Tente mais tarde!');
+        res.redirect('/admin/posts');
+
+    });
+
+});
+
+router.get('/posts/cancel', (req, res) => {
+
+    res.redirect('/admin/posts');
 
 });
 
