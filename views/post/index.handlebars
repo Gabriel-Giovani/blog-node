@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-body">
+        <div class="text-center mb-5">
+            <h1>{{post.title}}</h1>
+            <p><i>{{post.description}}</i></p>
+
+            <hr width="400px">
+
+            <small>{{post.category.name}}</small> <br>
+            <small>Publicação: {{#formatDate}}  {{post.date}} {{/formatDate}}</small> <br>
+
+            <hr>
+        </div>
+
+        <p class="text-justfy">{{post.content}}</p>
+
+    </div>
+</div>

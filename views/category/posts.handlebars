@@ -1,0 +1,22 @@
+<h1 class="mb-5 text-center">{{category.name}}</h1>
+
+{{#each post}}
+
+    <div class="card mb-5 text-center">
+        <div class="card-body">
+            <h3>{{title}}</h3>
+            <p><i>{{description}}</i></p>
+            
+            <hr width="400px">
+
+            <small>Publicação: {{#formatDate}}  {{date}} {{/formatDate}}</small> <br>
+
+            <a href="/posts/{{slug}}" class="btn btn-success mt-3">Leia mais</a>
+        </div>
+    </div>
+
+{{else}}
+
+    <h5 align="center" class="text-secondary">Nenhuma postagem até o momento.</h5>
+
+{{/each}}
