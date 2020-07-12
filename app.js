@@ -11,6 +11,7 @@ const port = 3000;
 const ip = '127.0.0.1';
 const app = express();
 const admin = require('./routes/admin');
+const user = require('./routes/user');
 
 require('./models/Posts');
 const Post = mongoose.model('Post');
@@ -78,6 +79,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Routes
 app.use('/admin', admin);
+app.use('/user', user);
 
 app.get('/', (req, res) => {
 
