@@ -5,14 +5,15 @@ require('../models/Category');
 const Category = mongoose.model('Category');
 require('../models/Posts');
 const Post = mongoose.model('Post');
+const {isAdmin} = require('../utils/isAdmin');
 
-router.get('/', (req, res) => {
+router.get('/', isAdmin, (req, res) => {
 
     res.render('../views/admin/index');
 
 });
 
-router.get('/cat', (req, res) => {
+router.get('/cat', isAdmin, (req, res) => {
 
     Category.find().sort([['date', -1]]).lean().then((categories) => {
 
@@ -27,13 +28,13 @@ router.get('/cat', (req, res) => {
 
 });
 
-router.get('/cat/add', (req, res) => {
+router.get('/cat/add', isAdmin, (req, res) => {
 
     res.render('../views/admin/addCategories');
 
 });
 
-router.post('/cat/new', (req, res) => {
+router.post('/cat/new', isAdmin, (req, res) => {
 
     let name = req.body.name;
     let slug = req.body.slug;
@@ -88,7 +89,7 @@ router.post('/cat/new', (req, res) => {
 
 });
 
-router.get('/cat/edit/:id', (req, res) => {
+router.get('/cat/edit/:id', isAdmin, (req, res) => {
 
     Category.findOne({_id:req.params.id}).lean().then((category) => {
 
@@ -103,7 +104,7 @@ router.get('/cat/edit/:id', (req, res) => {
 
 });
 
-router.post('/cat/edit', (req, res) => {
+router.post('/cat/edit', isAdmin, (req, res) => {
 
     Category.findOne({_id: req.body.id}).then((category) => {
 
@@ -169,7 +170,7 @@ router.post('/cat/edit', (req, res) => {
 
 });
 
-router.post('/cat/delete', (req, res) => {
+router.post('/cat/delete', isAdmin, (req, res) => {
 
     Category.remove({_id: req.body.id}).then(() => {
 
@@ -185,13 +186,13 @@ router.post('/cat/delete', (req, res) => {
 
 });
 
-router.get('/cat/cancel', (req, res) => {
+router.get('/cat/cancel', isAdmin, (req, res) => {
 
     res.redirect('/admin/cat');
 
 });
 
-router.get('/posts', (req, res) => {
+router.get('/posts', isAdmin, (req, res) => {
 
     Post.find().populate('category').sort([['date', 'desc']]).lean().then((posts) => {
 
@@ -206,7 +207,7 @@ router.get('/posts', (req, res) => {
 
 });
 
-router.get('/posts/add', (req, res) => {
+router.get('/posts/add', isAdmin, (req, res) => {
 
     Category.find().lean().then((categories) => {
 
@@ -221,7 +222,7 @@ router.get('/posts/add', (req, res) => {
 
 });
 
-router.post('/posts/new', (req, res) => {
+router.post('/posts/new', isAdmin, (req, res) => {
 
     let title = req.body.title;
     let slug = req.body.slug;
@@ -287,7 +288,7 @@ router.post('/posts/new', (req, res) => {
 
 });
 
-router.get('/posts/edit/:id', (req, res) => {
+router.get('/posts/edit/:id', isAdmin, (req, res) => {
 
     Post.findOne({_id: req.params.id}).lean().then((post) => {
 
@@ -309,7 +310,7 @@ router.get('/posts/edit/:id', (req, res) => {
 
 });
 
-router.post('/posts/edit', (req, res) => {
+router.post('/posts/edit', isAdmin, (req, res) => {
 
     Post.findOne({_id: req.body.id}).then((post) => {
 
@@ -389,7 +390,7 @@ router.post('/posts/edit', (req, res) => {
 
 });
 
-router.post('/posts/delete', (req, res) => {
+router.post('/posts/delete', isAdmin, (req, res) => {
 
     Post.remove({_id: req.body.id}).then(() => {
 
@@ -405,7 +406,7 @@ router.post('/posts/delete', (req, res) => {
 
 });
 
-router.get('/posts/cancel', (req, res) => {
+router.get('/posts/cancel', isAdmin, (req, res) => {
 
     res.redirect('/admin/posts');
 

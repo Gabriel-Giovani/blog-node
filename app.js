@@ -12,6 +12,8 @@ const ip = '127.0.0.1';
 const app = express();
 const admin = require('./routes/admin');
 const user = require('./routes/user');
+const passport = require('passport');
+require('./config/auth')(passport);
 
 require('./models/Posts');
 const Post = mongoose.model('Post');
@@ -40,6 +42,10 @@ app.use(session({
 
 }));
 
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Flash
 app.use(flash());
 
@@ -48,6 +54,8 @@ app.use((req, res, next) => {
 
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
 
     next();
 
