@@ -38,7 +38,7 @@
 
   <div class="form-group">
     <label for="desc">Descrição: </label>
-    <textarea class="form-control" id="desc" name="desc" rows="2"></textarea>
+    <input class="form-control" id="desc" name="desc">
   </div>
 
   <div class="form-group text-center">
@@ -48,8 +48,10 @@
 
   <div class="form-group mt-5 mb-5">
     <label for="image"><strong>Imagem principal: </strong></label> <br>
-    <input type="file" id="image" name="image">
+    <input type="file" id="image" class="mb-4" name="image" accept="image/*" onchange="previewImage()"> <br>
+
+    <img id="preview-img" class="preview-img">
   </div>
 
-  <button type="submit" class="btn btn-success">Salvar</button>
+  <button type="submit" class="btn btn-success">Salvar postagem</button>
 </form>

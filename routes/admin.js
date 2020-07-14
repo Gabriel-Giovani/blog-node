@@ -248,7 +248,8 @@ router.post('/posts/new', upload.single('image'), (req, res) => {
     let category = req.body.category;
     let desc = req.body.desc;
     let content = req.body.content;
-    let image = req.file.filename;
+    let image = "";
+    let allowedExt = ['jpg', 'png', 'gif', 'jpeg'];
     let errors = [];
 
     if(!title || typeof title == undefined || title == null){
@@ -266,6 +267,24 @@ router.post('/posts/new', upload.single('image'), (req, res) => {
     if(category == '0'){
 
         errors.push({text: 'Categoria inválida. Registre uma categoria antes de salvar uma postagem.'});
+
+    }
+
+    if(!req.file){
+
+        image = 'default.png';
+
+    } else{
+
+        image = req.file.filename;
+
+    }
+
+    let imageExt = image.split('.').pop();
+
+    if(typeof allowedExt.find((ext) => { return imageExt == ext; }) == 'undefined'){
+
+        errors.push({text: 'Extensão de arquivo não permitida!'});
 
     }
 
@@ -295,7 +314,6 @@ router.post('/posts/new', upload.single('image'), (req, res) => {
 
         new Post(newPost).save().then(() => {
 
-            console.log(image);
             req.flash('success_msg', 'Postagem criada com sucesso!');
             res.redirect('/admin/posts');
 
@@ -310,7 +328,7 @@ router.post('/posts/new', upload.single('image'), (req, res) => {
 
 });
 
-router.get('/posts/edit/:id', isAdmin, (req, res) => {
+router.get('/posts/edit/:id', (req, res) => {
 
     Post.findOne({_id: req.params.id}).lean().then((post) => {
 
@@ -332,7 +350,7 @@ router.get('/posts/edit/:id', isAdmin, (req, res) => {
 
 });
 
-router.post('/posts/edit', isAdmin, (req, res) => {
+router.post('/posts/edit', upload.single('image'), (req, res) => {
 
     Post.findOne({_id: req.body.id}).then((post) => {
 
@@ -342,6 +360,8 @@ router.post('/posts/edit', isAdmin, (req, res) => {
         let category = req.body.category;
         let desc = req.body.desc;
         let content = req.body.content;
+        let image = "";
+        let allowedExt = ['jpg', 'png', 'gif', 'jpeg'];
         let errors = [];
 
         if(!title || typeof title == undefined || title == null){
@@ -362,6 +382,24 @@ router.post('/posts/edit', isAdmin, (req, res) => {
 
         }
 
+        if(!req.file){
+
+            image = post.image;
+
+        } else{
+
+            image = req.file.filename;
+
+        }
+
+        let imageExt = image.split('.').pop();
+
+        if(typeof allowedExt.find((ext) => { return imageExt == ext; }) == 'undefined'){
+
+            errors.push({text: 'Extensão de arquivo não permitida!'});
+    
+        }
+        
         if(errors.length > 0){
 
             Category.find().lean().then((categories) => {
@@ -375,7 +413,8 @@ router.post('/posts/edit', isAdmin, (req, res) => {
                         slug: slug,
                         category: category,
                         description: desc,
-                        content: content
+                        content: content,
+                        image: image
                     }
                 });
 
@@ -388,6 +427,7 @@ router.post('/posts/edit', isAdmin, (req, res) => {
             post.category = category;
             post.description = desc;
             post.content = content;
+            post.image = image;
 
             post.save().then(() => {
 
@@ -412,7 +452,7 @@ router.post('/posts/edit', isAdmin, (req, res) => {
 
 });
 
-router.post('/posts/delete', isAdmin, (req, res) => {
+router.post('/posts/delete', (req, res) => {
 
     Post.remove({_id: req.body.id}).then(() => {
 
@@ -428,7 +468,7 @@ router.post('/posts/delete', isAdmin, (req, res) => {
 
 });
 
-router.get('/posts/cancel', isAdmin, (req, res) => {
+router.get('/posts/cancel', (req, res) => {
 
     res.redirect('/admin/posts');
 

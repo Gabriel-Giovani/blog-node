@@ -13,7 +13,7 @@
 
 <h2>Editar postagem</h2>
 
-<form class="mb-5" action="/admin/posts/edit" method="POST">
+<form class="mb-5" action="/admin/posts/edit" method="POST" enctype="multipart/form-data">
   <div class="form-group">
     <input type="hidden" name="id" value="{{post._id}}">
     <label for="title-post">Título da postagem: </label>
@@ -39,7 +39,7 @@
 
   <div class="form-group">
     <label for="desc">Descrição: </label>
-    <textarea class="form-control" id="desc" name="desc" rows="2">{{post.description}}</textarea>
+    <input class="form-control" id="desc" name="desc" value="{{post.description}}">
   </div>
 
   <div class="form-group text-center">
@@ -47,6 +47,13 @@
     <textarea class="form-control" id="content" name="content" rows="10">{{post.content}}</textarea>
   </div>
 
+  <div class="form-group mt-5 mb-5">
+    <label for="image"><strong>Imagem principal: </strong></label> <br>
+    <input type="file" id="image" class="mb-4" name="image" accept="image/*" onchange="previewImage()"> <br>
+
+    <img src="/uploads/{{post.image}}" id="preview-img" class="preview-img">
+  </div>
+
   <a href="/admin/posts/cancel"><button type="button" class="btn btn-danger">Cancelar</button></a>
-  <button type="submit" class="btn btn-success">Salvar</button>
+  <button type="submit" class="btn btn-success">Salvar postagem</button>
 </form>

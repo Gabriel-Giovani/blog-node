@@ -26,11 +26,11 @@
             <small>Data de criação: {{#formatDate}} {{date}} {{/formatDate}}</small> <br>
 
             <a href="/admin/posts/edit/{{_id}}"><button class="btn btn-warning mt-3">Editar</button></a>
-            <button class="btn btn-danger mt-3" data-toggle="modal" data-target="#delete-post">Deletar</button>
+            <button class="btn btn-danger mt-3" data-toggle="modal" data-target="#delete-post{{_id}}">Deletar</button>
         </div>
     </div>
 
-    <div class="modal fade" id="delete-post" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete-post{{_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
