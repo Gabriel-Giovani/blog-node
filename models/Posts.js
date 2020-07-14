@@ -24,6 +24,10 @@ const Post = new Schema({
         type: String,
         required: true
     },
+    image:{
+        type: String,
+        default: 'teste.jpg'
+    },
     date:{
         type: Date,
         default: Date.now()

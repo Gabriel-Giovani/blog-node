@@ -84,6 +84,7 @@ app.set('view engine', 'handlebars');
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/'));
 
 //Routes
 app.use('/admin', admin);

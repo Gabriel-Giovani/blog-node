@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins&family=Poppins:wght@700&display=swap');
+
+.post{
+    transition: .3s ease;
+    height: 500px;
+}
+
+.post:hover{
+    transform: scale(1.05);
+}
+
+.img-post{
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-post img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+    filter: opacity(0.7);
+    transition: .3s ease;
+}
+
+.post:hover .img-post img{
+    filter: opacity(1);
+}
+
+.desc-post{
+    height: 100%;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.desc-post span{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.post-date{
+    text-transform: none !important;
+    transition: .3s ease; 
+}
+
+.post:hover .post-date{
+    color: #000; 
+}
+
+.post-title{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 52px;
+    transition: .3s ease;   
+}
+
+.post:hover .post-title{
+    color: #000; 
+}
+
+.btn-read{
+    background-color: rgb(255, 192, 56);
+    border: 1px solid rgb(255, 192, 56);
+    font-weight: 700;
+    padding: 10px;
+    transition: .3s ease;
+}
+
+.post:hover .btn-read{
+    background-color: #FFF;
+    color: rgb(255, 192, 56); 
+}
+
+.btn-read:hover{
+    border: 1px solid rgb(255, 192, 56);
+}

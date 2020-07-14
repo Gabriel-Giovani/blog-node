@@ -76,7 +76,8 @@ router.post('/register', (req, res) => {
 
                     name: name,
                     email: email,
-                    password: password
+                    password: password,
+                    isAdmin: 1
         
                 }
 

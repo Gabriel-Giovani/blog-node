@@ -1,20 +1,26 @@
-<div class="jumbotron">
-  <h1 class="display-4">Bem vindo ao blog do Node!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Criar conta</a>
-  </p>
-</div>
-
-<hr>
-
-<h2 class="mb-5">Postagens recentes</h2>
-
 {{#each post}}
+    <div class="container">
+        <div class="row post mb-5">
+            <div class="col-md-7 col-sm-7 img-post">
+                <img src="/uploads/{{image}}" alt="Imagem Post">
+            </div>
 
-    <div class="card mb-5 text-center">
+            <div class="col-md-5 col-sm-5 desc-post">
+                <span>{{category.name}}</span>
+                <h3 class="post-title mb-3">{{title}}</h3>
+                <p><i>{{description}}</i></p>
+                <a href="/posts/{{slug}}" class="btn btn-success mt-3 mb-4 btn-read">Leia mais</a> <br>
+                <span class="post-date">Publicação: {{#formatDate}}  {{date}} {{/formatDate}}</span>
+            </div>
+        </div>
+    </div>
+{{else}}
+
+    <h5 align="center" class="text-secondary">Nenhuma postagem até o momento.</h5>
+
+{{/each}}
+
+    {{!-- <div class="card mb-5 text-center">
         <div class="card-body">
             <h3>{{title}}</h3>
             <p><i>{{description}}</i></p>
@@ -26,10 +32,4 @@
 
             <a href="/posts/{{slug}}" class="btn btn-success mt-3">Leia mais</a>
         </div>
-    </div>
-
-{{else}}
-
-    <h5 align="center" class="text-secondary">Nenhuma postagem até o momento.</h5>
-
-{{/each}}
+    </div> --}}

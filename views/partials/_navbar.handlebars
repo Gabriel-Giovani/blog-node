@@ -1,57 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">Blog do Node</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg menu">
+  
+  <div class="container menu-content navbar-light">
+    <a class="navbar-brand" href="/"><img src="/public/img/logo.png" alt="Logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/categories">Categorias</a>
-      </li>
-
-      {{#if user}}
-      
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto menu-items">
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#logout" style="cursor: pointer;">Sair</a>
-        </li>
-
-        <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Sair</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  Tem certeza que deseja sair?
-              </div>
-              <div class="modal-footer">
-                  <form action="/user/logout" method="GET">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Sair</button></a>
-                  </form>
-              </div>
-              </div>
-          </div>
-      </div>
-
-      {{else}}
-
-        <li class="nav-item">
-          <a class="nav-link" href="/user/login">Login</a>
+          <a class="nav-link active" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user/register">Registro</a>
+          <a class="nav-link" href="/">Posts</a>
         </li>
-
-      {{/if}}
-
-    </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Categorias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Sobre mim</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Contato</a>
+        </li>
+      </ul>
+    </div>
   </div>
+  
 </nav>

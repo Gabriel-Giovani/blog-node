@@ -1,11 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const path = require('path');
 require('../models/Category');
 const Category = mongoose.model('Category');
 require('../models/Posts');
 const Post = mongoose.model('Post');
 const {isAdmin} = require('../utils/isAdmin');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+
+    destination: (req, file, callBack) => {
+
+        callBack(null, 'uploads/');
+
+    },
+    filename: (req, file, callBack) => {
+
+        callBack(null, file.originalname + Date.now() + path.extname(file.originalname));
+
+    }
+
+});
+
+const upload = multer({storage});
 
 router.get('/', isAdmin, (req, res) => {
 
@@ -192,7 +211,7 @@ router.get('/cat/cancel', isAdmin, (req, res) => {
 
 });
 
-router.get('/posts', isAdmin, (req, res) => {
+router.get('/posts', (req, res) => {
 
     Post.find().populate('category').sort([['date', 'desc']]).lean().then((posts) => {
 
@@ -207,7 +226,7 @@ router.get('/posts', isAdmin, (req, res) => {
 
 });
 
-router.get('/posts/add', isAdmin, (req, res) => {
+router.get('/posts/add', (req, res) => {
 
     Category.find().lean().then((categories) => {
 
@@ -222,13 +241,14 @@ router.get('/posts/add', isAdmin, (req, res) => {
 
 });
 
-router.post('/posts/new', isAdmin, (req, res) => {
+router.post('/posts/new', upload.single('image'), (req, res) => {
 
     let title = req.body.title;
     let slug = req.body.slug;
     let category = req.body.category;
     let desc = req.body.desc;
     let content = req.body.content;
+    let image = req.file.filename;
     let errors = [];
 
     if(!title || typeof title == undefined || title == null){
@@ -268,18 +288,20 @@ router.post('/posts/new', isAdmin, (req, res) => {
             slug: slug,
             category: category,
             description: desc,
-            content: content
+            content: content,
+            image: image
 
         }
 
         new Post(newPost).save().then(() => {
 
+            console.log(image);
             req.flash('success_msg', 'Postagem criada com sucesso!');
             res.redirect('/admin/posts');
 
         }).catch((error) => {
 
-            req.flash('error_msg', 'Houve um erro ao salvar a postagem. Tente novamente mais tarde!');
+            req.flash('error_msg', 'Houve um erro ao salvar a postagem. Tente novamente mais tarde!' + error);
             res.redirect('/admin/posts');
 
         });

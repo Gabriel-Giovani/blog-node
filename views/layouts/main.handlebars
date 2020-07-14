@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/navbar.css">
+    <link rel="stylesheet" href="/public/css/postIndex.css">
+
     <title>Blog</title>
 </head>
 <body>
-    
-    <div class="mb-5">
-        {{>_navbar}}
-    </div>
 
-    <div class="container">
+    {{>_navbar}}
+
+    <div class="container content">
         {{#if error}}
 
             <div class="alert alert-danger alert-dismissible fade show">
