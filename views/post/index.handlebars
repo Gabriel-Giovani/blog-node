@@ -1,4 +1,4 @@
-<div class="card">
+{{!-- <div class="card">
     <div class="card-body">
         <div class="text-center mb-5">
             <h1>{{post.title}}</h1>
@@ -12,7 +12,30 @@
             <hr>
         </div>
 
-        <p class="text-justfy">{{post.content}}</p>
+        <div>{{{post.content}}}</div>
 
+    </div>
+</div> --}}
+
+<div class="container-fluid">
+    <div class="row body-post">
+        <div class="col-md-12 col-sm-12" style="padding: 0;">
+            <div class="col-md-8 col-sm-8 content-post text-center">
+                <div class="image-post mb-5">
+                    <img src="/uploads/{{post.image}}" alt="{{post.title}}">
+                </div>
+
+                <h2 class="text-center title-post">{{post.title}}</h2>
+                <span class="date-post">Publicado em: {{#formatDate}} {{post.date}} {{/formatDate}}</span>
+
+                <div class="article text-justify mt-5">
+                    {{{post.content}}}
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 sidebar">
+                BBBBBBBBB
+            </div>
+        </div>
     </div>
 </div>
