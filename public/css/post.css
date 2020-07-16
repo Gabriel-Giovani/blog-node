@@ -6,26 +6,27 @@
 }
 
 .body-post{
-    border: 1px solid black;
-    margin: 20px;
+    border: 1px solid red;
+    padding: 40px;
     font-family: 'Poppins', sans-serif;
 }
 
 .content-post{
-    max-width: 790px;
-    padding: 50px;
+    width: 63%;
+    border-radius: 5px;
+    box-shadow: 0px 1px 6px 0px rgba(158,158,158,1);
+    padding: 30px;
     float: left;
-    border: 1px solid red;
+    margin-right: 10px;
 }
 
-.image-post{
+.image-post, .content-post img{
     max-width: 700px;
     max-height: 500px;
     margin: 0 auto;
-    border: 1px solid green;
 }
 
-.image-post img{
+.image-post img, .content-post img{
     width: 100%;
     height: 100%;
     object-fit: contain; 
@@ -36,12 +37,55 @@
     color: rgba(0, 0, 0, 0.8);
 }
 
-.date-post{
+.date-post, .category{
     color: rgba(0, 0, 0, 0.5);
     font-size: 14px;
 }
 
 .sidebar{
-    background-color: blue;
+    border-radius: 5px;
+    box-shadow: 0px 1px 6px 0px rgba(158,158,158,1);
     float: right;
+    padding: 30px;
+}
+
+.sidebar h5{
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.btn-search{
+    transition: .3s ease;
+}
+
+.btn-search:hover{
+    color: #FFF;
+}
+
+.categories-list ul li{
+    list-style: none;
+    font-size: 15px;
+    letter-spacing: -1px;
+    color: rgb(26, 26, 26);
+    transition: .3s ease;
+}
+
+.categories-list a{
+    text-decoration: none;
+}
+
+.categories-list ul li:hover{
+    color: rgb(255, 192, 56);
+}
+
+@media screen and (max-width: 991px){
+    .content-post{
+        width: 100%;
+        float: none;
+        margin-bottom: 30px;
+    }
+
+    .sidebar{
+        float: none;
+    }
 }

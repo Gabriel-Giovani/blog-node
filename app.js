@@ -111,7 +111,14 @@ app.get('/posts/:slug', (req, res) => {
 
         if(post){
 
-            res.render('../views/post/index', {post: post});
+            Category.find().lean().then((categories) => {
+
+                res.render('../views/post/index', {
+                    post: post,
+                    categories: categories
+                });
+
+            });
 
         } else{
 
