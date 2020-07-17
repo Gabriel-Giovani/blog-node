@@ -6,7 +6,6 @@
 }
 
 .body-post{
-    border: 1px solid red;
     padding: 40px;
     font-family: 'Poppins', sans-serif;
 }
@@ -26,7 +25,7 @@
     margin: 0 auto;
 }
 
-.image-post img, .content-post img{
+.image-post img, .content-post img, .photo-author img{
     width: 100%;
     height: 100%;
     object-fit: contain; 
@@ -42,6 +41,38 @@
     font-size: 14px;
 }
 
+.card-author{
+    border-radius: 5px;
+    box-shadow: 0px 1px 6px 0px rgba(158,158,158,1);
+    display: flex;
+}
+
+.photo-author{
+    width: 40%;
+    height: 100%;
+    padding: 10px;
+}
+
+.desc-author{
+    padding: 30px 10px;
+}
+
+.social-author ul li{
+    list-style: none;
+    display: inline-block;
+    color: rgb(255, 192, 56);
+    font-size: 20px;
+    border: 1px solid rgb(255, 192, 56);
+    border-radius: 8px;
+    padding: 5px 10px;
+    transition: .3s ease;
+}
+
+.social-author ul li:hover{
+    color: #FFF;
+    background-color: rgb(255, 192, 56);
+}
+
 .sidebar{
     border-radius: 5px;
     box-shadow: 0px 1px 6px 0px rgba(158,158,158,1);
@@ -54,7 +85,14 @@
     font-size: 18px;
 }
 
+.sidebar .search{
+    width: 100%;
+}
+
 .btn-search{
+    position: absolute;
+    right: 30px;
+    border: none;
     transition: .3s ease;
 }
 
@@ -70,12 +108,49 @@
     transition: .3s ease;
 }
 
-.categories-list a{
+.categories-list a, .recent-posts a{
     text-decoration: none;
 }
 
 .categories-list ul li:hover{
     color: rgb(255, 192, 56);
+}
+
+.block-recent-post{
+    display: flex;
+}
+
+.recent-post-image{
+    height: 80px;
+    width: 80px;
+}
+
+.recent-post-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+}
+
+.recent-post-text{
+    width: calc(100% - 100px);
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.recent-post-text h4{
+    color: rgb(26, 26, 26);
+    font-size: 16px;
+    transition: .3s ease;
+}
+
+.recent-post-text h4:hover{
+    color: rgb(255, 192, 56);
+}
+
+.recent-post-text span{
+    color: gray;
+    font-size: 12px;
 }
 
 @media screen and (max-width: 991px){
@@ -87,5 +162,30 @@
 
     .sidebar{
         float: none;
+    }
+}
+
+@media screen and (max-width: 766px){
+    .body-post{
+        padding: 10px;
+    }
+
+    .card-author{
+        display: block;
+    }
+
+    .photo-author{
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (max-width: 500px){
+    .content-post{
+        padding: 10px;
+    }
+
+    .content-post h2{
+        font-size: 25px;
     }
 }

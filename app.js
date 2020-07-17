@@ -113,9 +113,14 @@ app.get('/posts/:slug', (req, res) => {
 
             Category.find().lean().then((categories) => {
 
-                res.render('../views/post/index', {
-                    post: post,
-                    categories: categories
+                Post.find().lean().limit(5).sort({date: 'desc'}).then((posts) => {
+
+                    res.render('../views/post/index', {
+                        post: post,
+                        posts: posts,
+                        categories: categories
+                    });
+
                 });
 
             });

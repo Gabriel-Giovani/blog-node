@@ -28,21 +28,41 @@
                 </div>
 
                 <h2 class="text-center title-post">{{post.title}}</h2>
+                <span class="category mb-2">{{post.category.name}}</span> <br>
                 <span class="date-post">Publicado em: {{#formatDate}} {{post.date}} {{/formatDate}}</span>
 
                 <div class="article text-justify mt-5">
                     {{{post.content}}}
                 </div>
-                
-                <span class="category badge badge-light">{{post.category.name}}</span>
 
+                <hr class="mt-5 mb-5">
+
+                <div class="card-author">
+                    <div class="photo-author">
+                        <img class="rounded-circle" src="/public/img/author.jpg" alt="Autor">
+                    </div>
+
+                    <div class="desc-author">
+                        <h3>Gabriel Giovani</h3>
+                        <p>Desenvolvedor web e estudante de Análise e Desenvolvimento de Sistemas.</p>
+
+                        <div class="social-author">
+                            <ul>
+                                <a href=""><li><i class="fa fa-instagram" aria-hidden="true"></i></li></a>
+                                <a href=""><li><i class="fa fa-twitter" aria-hidden="true"></i></li></a>
+                                <a href=""><li><i class="fa fa-linkedin" aria-hidden="true"></i></li></a>
+                                <a href=""><li><i class="fa fa-github" aria-hidden="true"></i></li></a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-lg-4 col-md-12 col-sm-12 sidebar">
 
                 <form class="form-inline mb-5">
-                    <input class="form-control mr-sm-2" type="search" placeholder="O que você procura?" aria-label="Search">
                     <button class="btn btn-outline-warning btn-search my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <input class="form-control search" type="search" placeholder="O que você procura?" aria-label="Search">
                 </form>
 
                 <div class="categories-list mb-5">
@@ -60,10 +80,22 @@
 
                 <div class="recent-posts">
                     <h5 class="mb-4">Posts recentes</h5>
+                    {{#each posts}}
+                        <a href="">
+                            <div class="block-recent-post mb-4">
+                                <div class="recent-post-image">
+                                    <img src="/uploads/{{image}}" alt="">
+                                </div>
+
+                                <div class="recent-post-text">
+                                    <h4>{{title}}</h4>
+                                    <span><i class="fa fa-calendar" aria-hidden="true"></i> {{#formatDate}}{{date}}{{/formatDate}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    {{/each}}
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

@@ -1,11 +1,11 @@
 {{#each post}}
     <div class="container">
         <div class="row post mb-5">
-            <div class="col-md-7 col-sm-7 img-post">
+            <div class="col-md-7 col-sm-12 img-post">
                 <img src="/uploads/{{image}}" alt="Imagem Post">
             </div>
 
-            <div class="col-md-5 col-sm-5 desc-post">
+            <div class="col-md-5 col-sm-12 desc-post">
                 <span>{{category.name}}</span>
                 <h3 class="post-title mb-3">{{title}}</h3>
                 <p><i>{{description}}</i></p>
@@ -19,17 +19,3 @@
     <h5 align="center" class="text-secondary">Nenhuma postagem até o momento.</h5>
 
 {{/each}}
-
-    {{!-- <div class="card mb-5 text-center">
-        <div class="card-body">
-            <h3>{{title}}</h3>
-            <p><i>{{description}}</i></p>
-            
-            <hr width="400px">
-
-            <small>{{category.name}}</small> <br>
-            <small>Publicação: {{#formatDate}}  {{date}} {{/formatDate}}</small> <br>
-
-            <a href="/posts/{{slug}}" class="btn btn-success mt-3">Leia mais</a>
-        </div>
-    </div> --}}
