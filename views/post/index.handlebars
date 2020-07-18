@@ -1,22 +1,3 @@
-{{!-- <div class="card">
-    <div class="card-body">
-        <div class="text-center mb-5">
-            <h1>{{post.title}}</h1>
-            <p><i>{{post.description}}</i></p>
-
-            <hr width="400px">
-
-            <small>{{post.category.name}}</small> <br>
-            <small>Publicação: {{#formatDate}}  {{post.date}} {{/formatDate}}</small> <br>
-
-            <hr>
-        </div>
-
-        <div>{{{post.content}}}</div>
-
-    </div>
-</div> --}}
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 col-sm-12 body-post pt-3 pb-3">
@@ -70,7 +51,7 @@
 
                     <ul>
                         {{#each categories}}
-                            <a href=""><li>{{name}}</li></a>
+                            <a href="/categories/{{slug}}"><li>{{name}}</li></a>
                             <hr>
                         {{else}}
 
@@ -81,7 +62,7 @@
                 <div class="recent-posts">
                     <h5 class="mb-4">Posts recentes</h5>
                     {{#each posts}}
-                        <a href="">
+                        <a href="/posts/{{slug}}">
                             <div class="block-recent-post mb-4">
                                 <div class="recent-post-image">
                                     <img src="/uploads/{{image}}" alt="">

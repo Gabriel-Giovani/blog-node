@@ -1,15 +1,17 @@
-<h1 class="text-center">Categorias</h1>
-
-<hr>
-
 {{#each categories}}
+    <div class="container body-cat">
+        <div class="row post cat mb-3">
+            <div class="col-md-7 col-sm-12 img-post img-cat">
+                <img src="/uploads/c981cbd34007b6376635105871346a2a.png1594688774137.png" alt="Imagem Post">
+            </div>
 
-    <div class="card mt-4 text-center">
-        <div class="card-body">
-            <a href="/categories/{{slug}}"><h5>{{name}}</h5></a>
+            <div class="col-md-5 col-sm-12 desc-post desc-cat">
+                <h3 class="post-title cat-name mb-3">{{name}}</h3>
+            </div>
         </div>
     </div>
-
 {{else}}
+
+    <h5 align="center" class="text-secondary">Nenhuma categoria até o momento.</h5>
 
 {{/each}}

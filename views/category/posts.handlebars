@@ -1,17 +1,21 @@
-<h1 class="mb-5 text-center">{{category.name}}</h1>
+<h1 class="text-center post-title cat-title">{{category.name}}</h1>
+<hr class="line-title mb-3">
 
 {{#each post}}
 
-    <div class="card mb-5 text-center">
-        <div class="card-body">
-            <h3>{{title}}</h3>
-            <p><i>{{description}}</i></p>
-            
-            <hr width="400px">
+    <div class="container">
+        <div class="row post mb-5">
+            <div class="col-md-7 col-sm-12 img-post">
+                <img src="/uploads/{{image}}" alt="Imagem Post">
+            </div>
 
-            <small>Publicação: {{#formatDate}}  {{date}} {{/formatDate}}</small> <br>
-
-            <a href="/posts/{{slug}}" class="btn btn-success mt-3">Leia mais</a>
+            <div class="col-md-5 col-sm-12 desc-post">
+                <span>{{category.name}}</span>
+                <h3 class="post-title mb-3">{{title}}</h3>
+                <p><i>{{description}}</i></p>
+                <a href="/posts/{{slug}}" class="btn btn-success mt-3 mb-4 btn-read">Leia mais</a> <br>
+                <span class="post-date">Publicação: {{#formatDate}}  {{date}} {{/formatDate}}</span>
+            </div>
         </div>
     </div>
 

@@ -162,7 +162,7 @@ app.get('/categories/:slug', (req, res) => {
 
         if(category){
 
-            Post.find({category: category._id}).lean().then((post) => {
+            Post.find({category: category._id}).lean().sort({date: 'desc'}).then((post) => {
 
                 res.render('../views/category/posts', {post: post, category: category});
 
@@ -186,6 +186,12 @@ app.get('/categories/:slug', (req, res) => {
         res.redirect('/categories');
 
     });
+
+});
+
+app.get('/about', (req, res) => {
+
+    res.render('../views/about/about')
 
 });
 

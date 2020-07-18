@@ -60,6 +60,18 @@
     transition: .3s ease;   
 }
 
+.cat-title{
+    color: #000;
+}
+
+.line-title{
+    width: 100px;
+    height: 2px;
+    border: none;
+    background-color: rgb(255, 192, 56);
+    margin: 0 auto;
+}
+
 .post:hover .post-title{
     color: #000; 
 }
