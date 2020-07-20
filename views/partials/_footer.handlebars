@@ -1,0 +1,62 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 social-footer">
+                <div class="logo-footer mb-5">
+                    <img src="/public/img/logo-transparent.png" alt="">
+                </div>
+                <div class="footer-text mb-5">
+                <p>Far far away, behind the word mountains, far from 
+                    the countries Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+                <div class="social-author">
+                    <ul>
+                        <a href=""><li><i class="fa fa-instagram" aria-hidden="true"></i></li></a>
+                        <a href=""><li><i class="fa fa-twitter" aria-hidden="true"></i></li></a>
+                        <a href=""><li><i class="fa fa-linkedin" aria-hidden="true"></i></li></a>
+                        <a href=""><li><i class="fa fa-github" aria-hidden="true"></i></li></a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 posts-footer">
+                <div class="recent-posts">
+                    <h5 class="mb-5">Posts recentes</h5>
+                    {{#each posts_footer}}
+                        <a href="/posts/{{slug}}">
+                            <div class="block-recent-post mb-4">
+                                <div class="recent-post-image">
+                                    <img src="/uploads/{{image}}" alt="">
+                                </div>
+
+                                <div class="recent-post-text">
+                                    <h4 class="post-footer">{{title}}</h4>
+                                    <span><i class="fa fa-calendar" aria-hidden="true"></i> {{#formatDate}}{{date}}{{/formatDate}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 pages-footer">
+                <h5 class="mb-4">Páginas</h5>
+
+                <ul>
+                    <a href="/"><li>Home</li></a>
+                    <a href="/about"><li>Sobre mim</li></a>
+                    <a href="/contact"><li>Contato</li></a>
+                </ul>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 contact-footer">
+                <h5 class="">Fale conosco</h5>
+
+                <div class="contact mt-5">
+                    <ul>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address: 198 West 21th Street, Suite 721 New York NY 10016</li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i> (+55) 1235 2355</li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i> info@yoursite.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

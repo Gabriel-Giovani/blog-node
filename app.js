@@ -6,8 +6,8 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const moment = require('moment');
-const linkMongo = 'mongodb://localhost/blogapp';
-const port = 3000;
+const linkMongo = 'mongodb+srv://admin:<password>@cluster0.knudl.mongodb.net/<dbname>?retryWrites=true&w=majority';
+const port = process.env.PORT || 3000;
 const ip = '127.0.0.1';
 const app = express();
 const admin = require('./routes/admin');
@@ -94,7 +94,14 @@ app.get('/', (req, res) => {
 
     Post.find().lean().populate('category').sort({date: 'desc'}).then((post) => {
 
-        res.render('index', {post: post});
+        Post.find().lean().limit(3).sort({date: 'desc'}).then((posts_footer) => {
+
+            res.render('index', {
+                post: post,
+                posts_footer: posts_footer
+            });
+
+        });
 
     }).catch((error) => {
 
@@ -115,10 +122,15 @@ app.get('/posts/:slug', (req, res) => {
 
                 Post.find().lean().limit(5).sort({date: 'desc'}).then((posts) => {
 
-                    res.render('../views/post/index', {
-                        post: post,
-                        posts: posts,
-                        categories: categories
+                    Post.find().lean().limit(3).sort({date: 'desc'}).then((posts_footer) => {
+
+                        res.render('../views/post/index', {
+                            post: post,
+                            posts: posts,
+                            posts_footer: posts_footer,
+                            categories: categories
+                        });
+
                     });
 
                 });
@@ -141,21 +153,6 @@ app.get('/posts/:slug', (req, res) => {
 
 });
 
-app.get('/categories', (req, res) => {
-
-    Category.find().lean().then((categories) => {
-
-        res.render('../views/category/index', {categories: categories});
-
-    }).catch((error) => {
-
-        req.flash('error_msg', 'Houve um erro ao listar as categorias. Tente mais tarde!');
-        req.redirect('/');
-
-    });
-
-});
-
 app.get('/categories/:slug', (req, res) => {
 
     Category.findOne({slug: req.params.slug}).lean().then((category) => {
@@ -164,7 +161,15 @@ app.get('/categories/:slug', (req, res) => {
 
             Post.find({category: category._id}).lean().sort({date: 'desc'}).then((post) => {
 
-                res.render('../views/category/posts', {post: post, category: category});
+                Post.find().lean().limit(3).sort({date: 'desc'}).then((posts_footer) => {
+
+                    res.render('../views/category/posts', {
+                        post: post,
+                        posts_footer: posts_footer,
+                        category: category
+                    });
+
+                });
 
             }).catch((error => {
 
@@ -191,15 +196,33 @@ app.get('/categories/:slug', (req, res) => {
 
 app.get('/about', (req, res) => {
 
-    res.render('../views/about/about')
+    Post.find().lean().limit(3).sort({date: 'desc'}).then((posts_footer) => {
+
+        res.render('../views/about/about', {posts_footer: posts_footer});
+
+    });
+
+});
+
+app.get('/contact', (req, res) => {
+
+    Post.find().lean().limit(3).sort({date: 'desc'}).then((posts_footer) => {
+
+        res.render('../views/contact/contact', {posts_footer: posts_footer});
+
+    });
 
 });
 
 app.get('/404', (req, res) => {
 
-    res.send('Error 404!');
+    Post.find().lean().limit(3).sort({date: 'desc'}).then((posts_footer) => {
 
-})
+        res.send('Error 404!', {posts_footer: posts_footer});
+
+    });
+
+});
 
 app.listen(port, ip, () => {
 

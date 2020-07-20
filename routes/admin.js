@@ -211,7 +211,7 @@ router.get('/cat/cancel', isAdmin, (req, res) => {
 
 });
 
-router.get('/posts', (req, res) => {
+router.get('/posts', isAdmin, (req, res) => {
 
     Post.find().populate('category').sort([['date', 'desc']]).lean().then((posts) => {
 
@@ -226,7 +226,7 @@ router.get('/posts', (req, res) => {
 
 });
 
-router.get('/posts/add', (req, res) => {
+router.get('/posts/add', isAdmin, (req, res) => {
 
     Category.find().lean().then((categories) => {
 
@@ -241,7 +241,7 @@ router.get('/posts/add', (req, res) => {
 
 });
 
-router.post('/posts/new', upload.single('image'), (req, res) => {
+router.post('/posts/new', isAdmin, upload.single('image'), (req, res) => {
 
     let title = req.body.title;
     let slug = req.body.slug;
@@ -328,7 +328,7 @@ router.post('/posts/new', upload.single('image'), (req, res) => {
 
 });
 
-router.get('/posts/edit/:id', (req, res) => {
+router.get('/posts/edit/:id', isAdmin, (req, res) => {
 
     Post.findOne({_id: req.params.id}).lean().then((post) => {
 
@@ -350,7 +350,7 @@ router.get('/posts/edit/:id', (req, res) => {
 
 });
 
-router.post('/posts/edit', upload.single('image'), (req, res) => {
+router.post('/posts/edit', isAdmin, upload.single('image'), (req, res) => {
 
     Post.findOne({_id: req.body.id}).then((post) => {
 
@@ -452,7 +452,7 @@ router.post('/posts/edit', upload.single('image'), (req, res) => {
 
 });
 
-router.post('/posts/delete', (req, res) => {
+router.post('/posts/delete', isAdmin, (req, res) => {
 
     Post.remove({_id: req.body.id}).then(() => {
 
@@ -468,7 +468,7 @@ router.post('/posts/delete', (req, res) => {
 
 });
 
-router.get('/posts/cancel', (req, res) => {
+router.get('/posts/cancel', isAdmin, (req, res) => {
 
     res.redirect('/admin/posts');
 
