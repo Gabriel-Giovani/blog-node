@@ -6,7 +6,7 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const moment = require('moment');
-const linkMongo = 'mongodb+srv://admin:<admin>@cluster0.knudl.mongodb.net/<BLOG_APP>?retryWrites=true&w=majority';
+const linkMongo = 'mongodb+srv://admin:<root>@cluster0.knudl.mongodb.net/<BLOG_APP>?retryWrites=true&w=majority';
 const port = process.env.PORT || 3000;
 const ip = '127.0.0.1';
 const app = express();
